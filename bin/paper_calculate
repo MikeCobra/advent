@@ -1,0 +1,27 @@
+#!/usr/bin/env ruby
+
+require_relative '../lib/present'
+
+if ARGV.length != 1
+  puts 'Usage: interpret <dimension_file>'
+  exit 1
+end
+
+dimensions = []
+
+File.open(ARGV[0], "r") do |f|
+  f.each_line { |line|
+    dimensions << line
+  }
+end
+
+presents = dimensions.map { |dimension| Present.from_string dimension }
+total_paper = presents.reduce(0) { |sum, present|
+  sum + present.required_paper
+}
+
+total_ribbon = presents.reduce(0) { |sum, present|
+  sum + present.required_ribbon
+}
+
+puts "#{total_paper} square feet of paper and #{total_ribbon} feet of ribbon is needed."
