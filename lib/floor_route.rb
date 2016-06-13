@@ -1,4 +1,6 @@
 class FloorRoute
+  attr_reader :route_string
+
   def initialize(string)
     @route_string = string
   end
