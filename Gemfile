@@ -6,5 +6,6 @@ gem 'sinatra'
 
 group :test do
   gem 'rspec'
-  gem 'codeclimate-test-reporter', group: :test, require: nil  
+  gem 'rack-test'
+  gem 'codeclimate-test-reporter', group: :test, require: nil
 end
