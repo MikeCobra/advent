@@ -25,5 +25,5 @@ post '/day2' do
     total_ribbon: list.total_ribbon
    }
 
-   result.to_json
+  result.to_json
 end
