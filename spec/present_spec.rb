@@ -117,4 +117,31 @@ RSpec.describe Present do
       end
     end
   end
+
+  describe '#==' do
+    context 'when given a present of the same dimensions' do
+      it 'should return true' do
+        present1 = Present.new(1, 2, 3)
+        present2 = Present.new(1, 2, 3)
+        expect(present1 == present2).to eq true
+      end
+    end
+
+    context 'when given a present of different dimensions' do
+      it 'should return true' do
+        present1 = Present.new(1, 2, 3)
+        present2 = Present.new(1, 3, 5)
+        expect(present1 == present2).to eq false
+      end
+    end
+  end
+
+  describe '#to_s' do
+    context 'when given a present with dimensions' do
+      it 'should give a string representation of the dimnesions' do
+        present = Present.new(1, 2, 3)
+        expect(present.to_s).to eq '1x2x3'
+      end
+    end
+  end
 end

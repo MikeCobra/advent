@@ -2,11 +2,10 @@ require 'sinatra'
 require 'json'
 
 require_relative 'floor_route'
-require_relative 'present'
+require_relative 'present_list'
 
 get '/day1/:route' do
-  route_string = params['route']
-  route = FloorRoute.new route_string
+  route = FloorRoute.new params['route']
 
   result = {
     route: route.route_string,
@@ -18,27 +17,12 @@ get '/day1/:route' do
 end
 
 post '/day2' do
-  dimension_list = request.body
-
-  dimensions = []
-
-  dimension_list.each_line { |line|
-    dimensions << line.strip
-  }
-
-  presents = dimensions.map { |dimension| Present.from_string dimension }
-  total_paper = presents.reduce(0) { |sum, present|
-    sum + present.required_paper
-  }
-
-  total_ribbon = presents.reduce(0) { |sum, present|
-    sum + present.required_ribbon
-  }
+  list = PresentList.from_string request.body
 
   result = {
-    present_sizes: dimensions,
-    total_paper: total_paper,
-    total_ribbon: total_ribbon
+    present_sizes: list.presents.map { |p| p.to_s },
+    total_paper: list.total_paper,
+    total_ribbon: list.total_ribbon
    }
 
    result.to_json

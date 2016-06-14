@@ -45,4 +45,8 @@ class Present
   def ==(another_present)
     @length == another_present.length && @width == another_present.width && @height == another_present.height
   end
+
+  def to_s
+    "#{@length}x#{@width}x#{@height}"
+  end
 end
