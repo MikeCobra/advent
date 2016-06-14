@@ -131,6 +131,32 @@ describe 'The Advent App' do
         json = JSON.parse last_response.body
         expect(json['visited_houses_count']).to eq 6
       end
+
+      it "returns the list of visited houses when using robot" do
+        route = ">^<vv>^"
+
+        post '/day3', route
+        expect(last_response).to be_ok
+
+        json = JSON.parse last_response.body
+        expected_list = [
+          {'x' => 0, 'y' => 0},
+          {'x' => 1, 'y' => 0},
+          {'x' => 0, 'y' => 1},
+          {'x' => 0, 'y' => -1}
+        ]
+        expect(json['visited_houses_with_robot']).to contain_exactly *expected_list
+      end
+
+      it "returns the number of visted houses when using robot" do
+        route = ">^<vv>^"
+
+        post '/day3', route
+        expect(last_response).to be_ok
+
+        json = JSON.parse last_response.body
+        expect(json['visited_houses_with_robot_count']).to eq 4
+      end
     end
   end
 end

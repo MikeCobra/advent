@@ -142,7 +142,7 @@ RSpec.describe HouseRoute do
     end
 
     context 'when given route with all directions' do
-      it 'should all house on route' do
+      it 'should return all houses on route' do
         route_string = '>^<vv>^'
         route = HouseRoute.new route_string
 
@@ -155,6 +155,25 @@ RSpec.describe HouseRoute do
           {x: 0, y: 1},
           {x: 0, y: -1},
           {x: 1, y: -1}
+        ]
+        expect(result).to contain_exactly *expected_houses
+      end
+    end
+  end
+
+  describe '#visted_houses_with_robot' do
+    context 'when given a route' do
+      it 'should return houses visited by either santa' do
+        route_string = '>^<vv>^'
+        route = HouseRoute.new route_string
+
+        result = route.visited_houses_with_robot
+
+        expected_houses = [
+          {x: 0, y: 0},
+          {x: 1, y: 0},
+          {x: 0, y: 1},
+          {x: 0, y: -1}
         ]
         expect(result).to contain_exactly *expected_houses
       end

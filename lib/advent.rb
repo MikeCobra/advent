@@ -36,7 +36,9 @@ post '/day3' do
     route: route.route,
     location: route.location,
     visited_houses: route.visited_houses,
-    visited_houses_count: route.visited_houses.count
+    visited_houses_count: route.visited_houses.count,
+    visited_houses_with_robot: route.visited_houses_with_robot,
+    visited_houses_with_robot_count: route.visited_houses_with_robot.count
   }
 
   JSON.dump(result)

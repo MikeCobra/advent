@@ -31,4 +31,15 @@ class HouseRoute
     }
     houses.to_a
   end
+
+  def visited_houses_with_robot
+    normal_santa_chars = @route.chars.select.with_index { |_, i| i.even? }
+    normal_santa_route = HouseRoute.new normal_santa_chars.join('')
+    robot_santa_chars = @route.chars.select.with_index { |_, i| i.odd? }
+    robot_santa_route = HouseRoute.new robot_santa_chars.join('')
+
+    houses = Set.new(normal_santa_route.visited_houses)
+    houses.merge robot_santa_route.visited_houses
+    houses.to_a
+  end
 end
