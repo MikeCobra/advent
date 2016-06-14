@@ -1,4 +1,4 @@
-require 'floor_route'
+require 'day1/floor_route'
 
 RSpec.describe FloorRoute do
 

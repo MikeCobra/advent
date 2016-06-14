@@ -1,4 +1,4 @@
-require 'present_list'
+require 'day2/present_list'
 
 RSpec.describe PresentList do
   describe '#from_string' do

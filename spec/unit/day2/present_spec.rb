@@ -1,4 +1,4 @@
-require 'present'
+require 'day2/present'
 
 RSpec.describe Present do
   describe '#smallest_side' do

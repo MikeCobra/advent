@@ -1,8 +1,8 @@
 require 'sinatra'
 require 'json'
 
-require_relative 'floor_route'
-require_relative 'present_list'
+require_relative 'day1/floor_route'
+require_relative 'day2/present_list'
 
 get '/day1/:route' do
   route = FloorRoute.new params['route']
