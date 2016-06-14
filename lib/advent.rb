@@ -3,6 +3,7 @@ require 'json'
 
 require_relative 'day1/floor_route'
 require_relative 'day2/present_list'
+require_relative 'day3/house_route'
 
 get '/day1/:route' do
   route = FloorRoute.new params['route']
