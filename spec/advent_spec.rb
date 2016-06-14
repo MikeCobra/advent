@@ -48,7 +48,7 @@ describe 'The Advent App' do
   end
 
   describe '/day2/' do
-    context 'when given a lit of presents' do
+    context 'when given a list of presents' do
       it "returns the list of presents" do
         list = "2x3x4\n1x1x10"
 
@@ -77,6 +77,59 @@ describe 'The Advent App' do
 
         json = JSON.parse last_response.body
         expect(json['total_ribbon']).to eq 48
+      end
+    end
+  end
+
+  describe '/day3/' do
+    context 'when given a string of a house route' do
+      it "returns the route" do
+        route = ">^<vv>^"
+
+        post '/day3', route
+        expect(last_response).to be_ok
+
+        json = JSON.parse last_response.body
+        expect(json['route']).to eq route
+      end
+
+      it "returns the final location" do
+        route = ">^<vv>^"
+
+        post '/day3', route
+        expect(last_response).to be_ok
+
+        json = JSON.parse last_response.body
+        expected_location = {'x' => 1, 'y' => 0}
+        expect(json['location']).to eq expected_location
+      end
+
+      it "returns the list of visited houses" do
+        route = ">^<vv>^"
+
+        post '/day3', route
+        expect(last_response).to be_ok
+
+        json = JSON.parse last_response.body
+        expected_list = [
+          {'x' => 0, 'y' => 0},
+          {'x' => 1, 'y' => 0},
+          {'x' => 1, 'y' => 1},
+          {'x' => 0, 'y' => 1},
+          {'x' => 0, 'y' => -1},
+          {'x' => 1, 'y' => -1}
+        ]
+        expect(json['visited_houses']).to contain_exactly *expected_list
+      end
+
+      it "returns the number of visted houses" do
+        route = ">^<vv>^"
+
+        post '/day3', route
+        expect(last_response).to be_ok
+
+        json = JSON.parse last_response.body
+        expect(json['visited_houses_count']).to eq 6
       end
     end
   end

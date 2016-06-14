@@ -27,3 +27,16 @@ post '/day2' do
 
   result.to_json
 end
+
+post '/day3' do
+  route = HouseRoute.new request.body.string
+
+  result = {
+    route: route.route,
+    location: route.location,
+    visited_houses: route.visited_houses,
+    visited_houses_count: route.visited_houses.count
+  }
+
+  JSON.dump(result)
+end
