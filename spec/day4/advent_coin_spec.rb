@@ -20,9 +20,17 @@ RSpec.describe AdventCoin do
         secret = 'abcdef'
         coin = AdventCoin.new secret
 
+        md5 = double('md5')
+        md5success = double('md5')
+        allow(Digest::MD5).to receive(:new).and_return(md5, md5success)
+        allow(md5).to receive(:<<)
+        allow(md5).to receive(:hexdigest) { '000011' }
+        allow(md5success).to receive(:<<)
+        allow(md5success).to receive(:hexdigest) { '000001' }
+
         result = coin.integer
 
-        expect(result).to eq 609043
+        expect(result).to eq 2
       end
     end
   end
@@ -33,9 +41,17 @@ RSpec.describe AdventCoin do
         secret = 'abcdef'
         coin = AdventCoin.new secret
 
+        md5 = double('md5')
+        md5success = double('md5')
+        allow(Digest::MD5).to receive(:new).and_return(md5, md5success)
+        allow(md5).to receive(:<<)
+        allow(md5).to receive(:hexdigest) { '000011' }
+        allow(md5success).to receive(:<<)
+        allow(md5success).to receive(:hexdigest) { '000000' }
+
         result = coin.integer_six
 
-        expect(result).to eq 6742839
+        expect(result).to eq 2
       end
     end
   end

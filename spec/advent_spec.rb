@@ -165,6 +165,11 @@ describe 'The Advent App' do
       it "returns the string" do
         secret = "abcdef"
 
+        md5 = double('md5')
+        allow(Digest::MD5).to receive(:new) { md5 }
+        allow(md5).to receive(:<<)
+        allow(md5).to receive(:hexdigest) { '000000' }
+
         get "/day4/#{secret}"
         expect(last_response).to be_ok
 
@@ -175,21 +180,37 @@ describe 'The Advent App' do
       it "returns the lowest integer that gives a 5 zero starting hash" do
         secret = "abcdef"
 
+        md5 = double('md5')
+        md5success = double('md5')
+        allow(Digest::MD5).to receive(:new).and_return(md5, md5success, md5, md5success)
+        allow(md5).to receive(:<<)
+        allow(md5).to receive(:hexdigest) { '000011' }
+        allow(md5success).to receive(:<<)
+        allow(md5success).to receive(:hexdigest) { '000000' }
+
         get "/day4/#{secret}"
         expect(last_response).to be_ok
 
         json = JSON.parse last_response.body
-        expect(json['integer']).to eq 609043
+        expect(json['integer']).to eq 2
       end
 
       it "returns the lowest integer that gives a 6 zero starting hash" do
         secret = "abcdef"
 
+        md5 = double('md5')
+        md5success = double('md5')
+        allow(Digest::MD5).to receive(:new).and_return(md5, md5success, md5, md5success)
+        allow(md5).to receive(:<<)
+        allow(md5).to receive(:hexdigest) { '000011' }
+        allow(md5success).to receive(:<<)
+        allow(md5success).to receive(:hexdigest) { '000000' }
+
         get "/day4/#{secret}"
         expect(last_response).to be_ok
 
         json = JSON.parse last_response.body
-        expect(json['integer_six']).to eq 6742839
+        expect(json['integer_six']).to eq 2
       end
     end
   end
