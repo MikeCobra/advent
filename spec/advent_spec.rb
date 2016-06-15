@@ -159,4 +159,28 @@ describe 'The Advent App' do
       end
     end
   end
+
+  describe '/day4/' do
+    context 'when given a string of a secret' do
+      it "returns the string" do
+        secret = "abcdef"
+
+        get "/day4/#{secret}"
+        expect(last_response).to be_ok
+
+        json = JSON.parse last_response.body
+        expect(json['secret']).to eq secret
+      end
+
+      it "returns the lowest integer that gives a 5 zero starting hash" do
+        secret = "abcdef"
+
+        get "/day4/#{secret}"
+        expect(last_response).to be_ok
+
+        json = JSON.parse last_response.body
+        expect(json['integer']).to eq 609043
+      end
+    end
+  end
 end

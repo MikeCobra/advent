@@ -4,6 +4,7 @@ require 'json'
 require_relative 'day1/floor_route'
 require_relative 'day2/present_list'
 require_relative 'day3/house_route'
+require_relative 'day4/advent_coin'
 
 get '/day1/:route' do
   route = FloorRoute.new params['route']
@@ -41,5 +42,16 @@ post '/day3' do
     visited_houses_with_robot_count: route.visited_houses_with_robot.count
   }
 
-  JSON.dump(result)
+  result.to_json
+end
+
+get '/day4/:secret' do
+  coin = AdventCoin.new params['secret']
+
+  result = {
+    secret: coin.secret,
+    integer: coin.integer
+  }
+
+  result.to_json
 end
