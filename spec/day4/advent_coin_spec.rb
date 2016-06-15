@@ -26,4 +26,17 @@ RSpec.describe AdventCoin do
       end
     end
   end
+
+  describe '#integer_six' do
+    context 'when given secret' do
+      it 'should return lowest integer which gives hash with leading 5 zeros' do
+        secret = 'abcdef'
+        coin = AdventCoin.new secret
+
+        result = coin.integer_six
+
+        expect(result).to eq 6742839
+      end
+    end
+  end
 end

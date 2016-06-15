@@ -50,7 +50,8 @@ get '/day4/:secret' do
 
   result = {
     secret: coin.secret,
-    integer: coin.integer
+    integer: coin.integer,
+    integer_six: coin.integer_six
   }
 
   result.to_json

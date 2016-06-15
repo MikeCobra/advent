@@ -181,6 +181,16 @@ describe 'The Advent App' do
         json = JSON.parse last_response.body
         expect(json['integer']).to eq 609043
       end
+
+      it "returns the lowest integer that gives a 6 zero starting hash" do
+        secret = "abcdef"
+
+        get "/day4/#{secret}"
+        expect(last_response).to be_ok
+
+        json = JSON.parse last_response.body
+        expect(json['integer_six']).to eq 6742839
+      end
     end
   end
 end
